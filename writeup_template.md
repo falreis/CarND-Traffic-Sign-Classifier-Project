@@ -86,46 +86,63 @@ Here is an example of a traffic sign image before and after the noise reduction.
 My final model consisted of the following layers:
 
 ##### Layer 1
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 5x5    	| 1x1 stride, same padding, outputs 28x28x6 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 14x14x6 			     	|
+| Layer | Description | 
+|:-----:|:-----------:| 
+| Input | 32x32x3 RGB image | 
+| Convolution 5x5 | 1x1 stride, same padding, outputs 28x28x6 |
+| RELU | |
+| Max pooling | 2x2 stride,  outputs 14x14x6 |
 
 ##### Layer 2
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 14x14x6 RGB image   							| 
-| Convolution 5x5    	| 1x1 stride, same padding, outputs 10x10x16	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 5x5x16 			     	|
-| Flatten		      	| Input = 5x5x16. Output = 400.			     	|
+| Layer | Description | 
+|:-----:|:-----------:| 
+| Input | 14x14x6 RGB image | 
+| Convolution 5x5 | 1x1 stride, same padding, outputs 10x10x16 |
+| RELU | |
+| Max pooling | 2x2 stride, outputs 5x5x16 |
+| Flatten | Input = 5x5x16. Output = 400. |
 
 ##### Layer 3
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 400   										| 
-| MatMul + RELU	    	| 												|
-| Output		      	| 120									     	|
+| Layer | Description | 
+|:-----:|:-----------:| 
+| Input | 400 | 
+| MatMul + RELU | |
+| Output | 120 |
 
 ##### Layer 4
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 120   										| 
-| MatMul + RELU	    	| 												|
-| Output		      	| 84									     	|
+| Layer | Description | 
+|:-----:|:-----------:| 
+| Input | 120 | 
+| MatMul + RELU | |
+| Output | 84 |
 
 ##### Layer 5
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 84	   										| 
-| MatMul + RELU	    	| 												|
-| Output		      	| 43									     	|
+| Layer | Description | 
+|:-----:|:-----------:| 
+| Input | 84 | 
+| MatMul + RELU | |
+| Output | 43 |
+
 
 #### 3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+To train the model, I kept the LeNet configuration, with few changes to accept images with 3 channels. I also kept the same architecture, with AdamOptimizer train optimizer. Also, I kept the minimize to the loss operation.
+
+The following parameters that I used was.
+
+| Parameter | Value | 
+|:---------:|:-----:| 
+| epochs | 15 | 
+| batch_size | 128 |
+| mu (conv. weight) | 0 |
+| sigma (conv. weight) | 0.03 |
+| rate | 0.0025	|
+
+To define the parameters I started with the LeNet MNIST project parameters. 
+
+The I started to refine the model and increase or decrease the parameters to get the best result, not overtraining or undertraining the solution.
+
+The parameters that I described in the table above, is a good solution found for the parameters. The Epochs parameter can be increase to 20 times and produce the same result with less variance, but the results is not significantly different from 15 epochs. The reduce the cost, I prefered to keep the algorithm running 15 epochs.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
@@ -155,7 +172,6 @@ Here are ten German traffic signs that I found on the web:
 ![German Traffic Sign Image 0][image0] ![German Traffic Sign Image 1][image1] ![German Traffic Sign Image 2][image2] ![German Traffic Sign Image 3][image3]  ![German Traffic Sign Image 4][image4] 
 ![German Traffic Sign Image 5][image5] ![German Traffic Sign Image 6][image6] ![German Traffic Sign Image 7][image7] ![German Traffic Sign Image 8][image8] ![German Traffic Sign Image 9][image9]
 
-
 1. The first image maybe be simple to classify because it's a good picture of the traffic sign;
 2. The second image might be difficult to classify because it's not a plain image, the sign seens to be warped;
 3. The third image probably will be easily classified;
@@ -171,33 +187,37 @@ Here are ten German traffic signs that I found on the web:
 
 Here are the results of the prediction:
 
-| Image			        |     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Image No. | Image | Prediction	| 
+|:--------:|:-----:|:----------:| 
+| (16) | Vehicles over 3.5 metric tons prohibited | Vehicles over 3.5 metric tons prohibited| 
+| (01) | Speed limit (30km/h)	| Speed limit (30km/h)|
+| (38) | Keep right	| Keep right|
+| (33) | Turn right ahead	| Turn right ahead|
+| (11) | Right-of-way at the next intersection	| Right-of-way at the next intersection|
+| (38) | Keep right	| Keep right|
+| (18) | General caution	| General caution|
+| (12) | Priority road	| Priority road|
+| (25) | Road work	| Road work|
+| (35) | Ahead only	| Ahead only|
 
-
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 10 of the 10 traffic signs, which gives an accuracy of 100%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
-
 For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
-
-
-For the second image ... 
+| Probability | Prediction | 
+|:-----------:|:----------:| 
+| .0-1. | Vehicles over 3.5 metric tons prohibited |
+| .0-1. | Speed limit (30km/h) |
+| .0-1. | Keep right |
+| .0-1. | Turn right ahead |
+| .0-1. | Right-of-way at the next intersection |
+| .0-1. | Keep right |
+| .0-1. | General caution |
+| .0-1. | Priority road |
+| .0-1. | Road work |
+| .0-1. | Ahead only |
 
 ---
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)

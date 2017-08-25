@@ -68,11 +68,13 @@ To finish, I plotted a pie graph with the percentages of each class in the train
 
 #### 1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
 
-As a first step, I decided to reduce the noise, calculating the average pixel data for the all image and then reducing it for each pixel.
+As a first step, I decided to reduce the noise, calculating the average pixel data for the all image and then reducing it for each pixel. I also divide the subtraction by the average, normalizing the image. The formula used was:
 
-I also turn the image into grayscale, but the image started to lost the contour of the important data. Then I stepped back and only apply the noise reduction.
+*pixel = (pixel - avg(image)) / avg(image)*
 
-Here is an example of a traffic sign image before and after the noise reduction.
+I also turn the image into grayscale, but the image started to lost the contour of the important data. Then I stepped back and only apply the normalization.
+
+Here is an example of a traffic sign image before and after the normalization.
 
 ![Image before and after the noise reduction][noise_reduction]
 
@@ -127,7 +129,7 @@ The following parameters that I used was.
 
 | Parameter | Value | 
 |:---------:|:-----:| 
-| epochs | 15 | 
+| epochs | 20 | 
 | batch_size | 128 |
 | mu (conv. weight) | 0 |
 | sigma (conv. weight) | 0.03 |
@@ -137,25 +139,44 @@ To define the parameters I started with the LeNet MNIST project parameters.
 
 The I started to refine the model and increase or decrease the parameters to get the best result, not overtraining or undertraining the solution.
 
-The parameters that I described in the table above, is a good solution found for the parameters. The Epochs parameter can be increase to 20 times and produce the same result with less variance, but the results is not significantly different from 15 epochs. The reduce the cost, I prefered to keep the algorithm running 15 epochs.
+The parameters that I described in the table above, is a good solution found for the parameters. Sometimes. using 15 epochs, the results is same as to the 20 epochs solution. I prefered to use 20 epochs to keep the results more stable.
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* validation set accuracy of 0.938
-* test set accuracy of 0.916
+* validation set accuracy of **0.938**
+* test set accuracy of **0.916**
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
+The interative aproaching used explanation:
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
+**1. What was the first architecture that was tried and why was it chosen?**
+
+The first LeNET architecture used was the same that I used in the end of the project. The changes were made in the normalized function. As discussed before, I used firsty the aproximation with *(pixel-128) / 128*, but the result was not good as expected. Then I also tried to convert image into grayscale, but the results not improved so much and I also had to change my architecture, because grayscale use only 1 channel.
+Then I thought to use the average to normalize the results. This option lead to improve my performance.
+
+**2. What were some problems with the initial architecture?**
+
+The problems with the initial architecture was the limitation of recognition. The initial architecture never has accuracy over 0.89, even if I tune the parameters to the best performance.
+
+**3. How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.**
+
+The architecture was kept the same. The ajustment was only to tune parameters to have the best performance. 
+
+**4. Which parameters were tuned? How were they adjusted and why?**
+
+The parameters tuned was epochs, rate and sigma. The epochs parameter was tuned because sometimes the result not converge as expected. Rate was tuned to learn in the best way possible. Sigma was used in the iterative approach to increase the results.
+
+**5. What architecture was chosen?**
+
+The LeNET architecture as chosen.
+
+**6. Why did you believe it would be relevant to the traffic sign application?**
+
+The architecture needs some tunes to be even more relevant in the traffic sign real application.
+
+**7. How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?**
+
+The evidence of accuracy was the results over 90% using the images from german sign database. The database has some difficult images to identify the results, as expected in the streets.
  
 ---
 ### Test a Model on New Images
@@ -168,16 +189,7 @@ Here are ten German traffic signs that I found on the web:
 ![German Traffic Sign Image 2][image2] ![German Traffic Sign Image 3][image3] 
 ![German Traffic Sign Image 4][image4] 
 
-1. The first image maybe be simple to classify because it's a good picture of the traffic sign;
-2. The second image might be difficult to classify because it's not a plain image, the sign seens to be warped;
-3. The third image probably will be easily classified;
-4. The fourth image has some problems like the background with different colors that can  confuse the algorithm;
-5. The fifth image probably will be easily classified;
-6. The sixth image probably will be easily classified. The image has a red color in the background but I think that will be not enought to confuse the algorithm;
-7. The seventh image can confuse the algorithm because it has a white background and it's a white sign;
-8. The eithgh image has bad resolution and colors and can be difficult to classify;
-9. The nineth image can be easily classified;
-10. The tenth image has some tree branchs that can confuse the algorithm. Also, the image seens to has some kind of shadow, that can be difficult to ignore.
+The images found on the internet maybe be easily classified because of its quality and good resolution. Some can be a little difficult, because of the background, but the training set has some more difficult information that can be more difficult to be classified then the images found on the web.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 

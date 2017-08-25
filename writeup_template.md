@@ -17,17 +17,12 @@ The goals / steps of this project are the following:
 [csv_classes]: ./writeup_images/csv_classes.png "CSV classes"
 [train_percentages]: ./writeup_images/train_percentages.png "Classes and percentages"
 [pie_graph]: ./writeup_images/pie_graph.png "Pie graph with classes and percentages"
-[noise_reduction]: ./ewriteup_images/noise_reduction.png "Image before and after the noise reduction"
-[image0]: ./german-traffic-signs/00000.ppm "German Traffic Sign Image 0"
-[image1]: ./german-traffic-signs/00001.ppm "German Traffic Sign Image 1"
-[image2]: ./german-traffic-signs/00002.ppm "German Traffic Sign Image 2"
-[image3]: ./german-traffic-signs/00003.ppm "German Traffic Sign Image 3"
-[image4]: ./german-traffic-signs/00004.ppm "German Traffic Sign Image 4"
-[image5]: ./german-traffic-signs/00005.ppm "German Traffic Sign Image 5"
-[image6]: ./german-traffic-signs/00006.ppm "German Traffic Sign Image 6"
-[image7]: ./german-traffic-signs/00007.ppm "German Traffic Sign Image 7"
-[image8]: ./german-traffic-signs/00008.ppm "German Traffic Sign Image 8"
-[image9]: ./german-traffic-signs/00009.ppm "German Traffic Sign Image 9"
+[noise_reduction]: ./writeup_images/noise_reduction.png "Image before and after the noise reduction"
+[image0]: ./german-traffic-signs/00000.jpg "German Traffic Sign Image 0"
+[image1]: ./german-traffic-signs/00001.jpg "German Traffic Sign Image 1"
+[image2]: ./german-traffic-signs/00002.jpg "German Traffic Sign Image 2"
+[image3]: ./german-traffic-signs/00003.jpg "German Traffic Sign Image 3"
+[image4]: ./german-traffic-signs/00004.jpg "German Traffic Sign Image 4"
 
 
 ## Rubric Points
@@ -147,8 +142,8 @@ The parameters that I described in the table above, is a good solution found for
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* validation set accuracy of 0.941
-* test set accuracy of 0.920
+* validation set accuracy of 0.938
+* test set accuracy of 0.916
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -169,8 +164,9 @@ If a well known architecture was chosen:
 
 Here are ten German traffic signs that I found on the web:
 
-![German Traffic Sign Image 0][image0] ![German Traffic Sign Image 1][image1] ![German Traffic Sign Image 2][image2] ![German Traffic Sign Image 3][image3]  ![German Traffic Sign Image 4][image4] 
-![German Traffic Sign Image 5][image5] ![German Traffic Sign Image 6][image6] ![German Traffic Sign Image 7][image7] ![German Traffic Sign Image 8][image8] ![German Traffic Sign Image 9][image9]
+![German Traffic Sign Image 0][image0] ![German Traffic Sign Image 1][image1] 
+![German Traffic Sign Image 2][image2] ![German Traffic Sign Image 3][image3] 
+![German Traffic Sign Image 4][image4] 
 
 1. The first image maybe be simple to classify because it's a good picture of the traffic sign;
 2. The second image might be difficult to classify because it's not a plain image, the sign seens to be warped;
@@ -194,30 +190,64 @@ Here are the results of the prediction:
 | (38) | Keep right	| Keep right|
 | (33) | Turn right ahead	| Turn right ahead|
 | (11) | Right-of-way at the next intersection	| Right-of-way at the next intersection|
-| (38) | Keep right	| Keep right|
-| (18) | General caution	| General caution|
-| (12) | Priority road	| Priority road|
-| (25) | Road work	| Road work|
-| (35) | Ahead only	| Ahead only|
 
-The model was able to correctly guess 10 of the 10 traffic signs, which gives an accuracy of 100%.
+The model was able to correctly guess 5 of 5 traffic signs, which gives an accuracy of 100%.
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
-
-| Probability | Prediction | 
-|:-----------:|:----------:| 
-| .0-1. | Vehicles over 3.5 metric tons prohibited |
-| .0-1. | Speed limit (30km/h) |
-| .0-1. | Keep right |
-| .0-1. | Turn right ahead |
-| .0-1. | Right-of-way at the next intersection |
-| .0-1. | Keep right |
-| .0-1. | General caution |
-| .0-1. | Priority road |
-| .0-1. | Road work |
-| .0-1. | Ahead only |
+<table>
+<th>Probability</th><th>Image</th>
+<tr>
+<td> 
+[ 0.60746935  0.60746935  0.60746935]<br>
+[ 0.60746935  0.60746935  0.60746935]<br>
+[ 0.60746935  0.60746935  0.60746935]<br>
+[ 0.60746935  0.60746935  0.60746935]<br>
+[ 0.58855794  0.58855794  0.58855794]
+</td>
+<td>Vehicles over 3.5 metric tons prohibited</td>
+</tr>
+<tr>
+<td> 
+[-0.06427948 -0.19232545 -0.64541117]<br>
+[ 0.24106089  0.06376648 -0.55676397]<br>
+[ 0.38880624  0.21151182 -0.47796645]<br>
+[ 0.31000872  0.15241369 -0.51736521]<br>
+[ 0.3297081   0.16226338 -0.63556148]
+</td>
+<td>Speed limit (30km/h)</td>
+</tr>
+<tr>
+<td>
+[-0.1498155  -0.24090669 -0.66599895]<br>
+[ 0.01212441 -0.11945177 -0.62551397]<br>
+[-0.03848181 -0.21054296 -0.77733263]<br>
+[-0.60527148 -0.64575646 -0.93927254]<br>
+[-0.39272536 -0.42308909 -0.82793885]
+</td>
+<td>Keep right</td>
+</tr>
+<tr>
+<td> 
+[ 0.54077944  0.54077944  0.52869489]<br>
+[ 0.54077944  0.54077944  0.52869489]<br>
+[ 0.54077944  0.54077944  0.52869489]<br>
+[ 0.54077944  0.54077944  0.52265262]<br>
+[ 0.52265262  0.51056808  0.5045258 ]
+</td>
+<td>Turn right ahead</td>
+</tr>
+<tr>
+<td> 
+[ 0.25789453  0.17212899  0.08636346]<br>
+[ 0.2507474   0.16498186  0.07921633]<br>
+[ 0.23645314  0.16498186  0.08636346]<br>
+[ 0.22215889  0.17212899  0.10780484]<br>
+[ 0.22215889  0.17927612  0.11495197]
+</td>
+<td>Right-of-way at the next intersection</td>
+</tr>
+</table>
 
 ---
 ### (Optional) Visualizing the Neural Network (See Step 4 of the Ipython notebook for more details)

@@ -15,8 +15,11 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [csv_classes]: ./writeup_images/csv_classes.png "CSV classes"
-[train_percentages]: ./writeup_images/train_percentages.png "Classes and percentages"
-[pie_graph]: ./writeup_images/pie_graph.png "Pie graph with classes and percentages"
+[train_percentages]: ./writeup_images/train_percentages.png "Classes and percentages for the train set"
+[test_percentages]: ./writeup_images/test_percentages.png "Classes and percentages for the test set"
+[pie_graph]: ./writeup_images/pie_graph.png "Pie graph with classes and percentages for the train set"
+[pie_graph_test]: ./writeup_images/pie_graph_test.png "Pie graph with classes and percentages for the test set"
+[bar_graph]: ./writeup_images/bar_graph.png "Bar graph to compare the train and test set"
 [noise_reduction]: ./writeup_images/noise_reduction.png "Image before and after the noise reduction"
 [image0]: ./german-traffic-signs/00000.jpg "German Traffic Sign Image 0"
 [image1]: ./german-traffic-signs/00001.jpg "German Traffic Sign Image 1"
@@ -55,13 +58,25 @@ Firstly, I printed all the classes in the CSV file and the names of the classes.
 
 ![CSV classes][csv_classes]
 
-Then, I printed the classes names, numbers and the percentage of information of each class.
+Then, I printed the classes names, numbers and the percentage of information of each class for the train set.
 
-![Classes and percentages][train_percentages]
+![Classes and percentages for the train set][train_percentages]
 
-To finish, I plotted a pie graph with the percentages of each class in the train set.
+I also plotted a pie graph with the percentages of each class in the train set.
 
-![Pie graph with classes and percentages][pie_graph]
+![Pie graph with classes and percentages for the train set][pie_graph]
+
+Then, I printed the classes names, numbers and the percentage of information of each class for the test set.
+
+![Classes and percentages for the test set][test_percentages]
+
+I plotted either a pie graph with the percentages of each class in the test set.
+
+![Pie graph with classes and percentages for the test set][pie_graph_test]
+
+To finish, I plotter a bar graph to compare the train set with the test set and the ammount of data for both.
+
+![Bar graph to compare the train and test set][bar_graph]
 
 ---
 ### Design and Test a Model Architecture

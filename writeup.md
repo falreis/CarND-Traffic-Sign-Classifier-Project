@@ -148,7 +148,7 @@ The following parameters that I used was.
 | epochs | 20 | 
 | batch_size | 128 |
 | mu (conv. weight) | 0 |
-| sigma (conv. weight) | 0.03 |
+| sigma (conv. weight) | 0.025 |
 | rate | 0.0025	|
 
 To define the parameters I started with the LeNet MNIST project parameters. 
@@ -160,8 +160,8 @@ The parameters that I described in the table above, is a good solution found for
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* validation set accuracy of **0.938**
-* test set accuracy of **0.916**
+* validation set accuracy of **0.932**
+* test set accuracy of **0.925**
 
 The interative aproaching used explanation:
 
@@ -205,23 +205,16 @@ Here are ten German traffic signs that I found on the web:
 ![German Traffic Sign Image 2][image2] ![German Traffic Sign Image 3][image3] 
 ![German Traffic Sign Image 4][image4] 
 
-The images found on the internet maybe be easily classified because of its quality and good resolution. Some can be a little difficult, because of the background, but the training set has some more difficult information that can be more difficult to be classified then the images found on the web.
+The images found on the internet maybe be easily classified because of its quality and good resolution. It's possible that some images cannot be classified because they are very different from the train and the test set, because some of them has a clean or no background, showing only the traffic sign. Other aspect that can cause problems to the algorithm identify is beacuse the images has not the size 32x32x3, but 128x128x3, and needs to be reduced to fit the algorithm, losting some of information.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-Here are the results of the prediction:
-
-| Image No. | Image | Prediction	| 
-|:--------:|:-----:|:----------:| 
-| (16) | Vehicles over 3.5 metric tons prohibited | Vehicles over 3.5 metric tons prohibited| 
-| (01) | Speed limit (30km/h)	| Speed limit (30km/h)|
-| (38) | Keep right	| Keep right|
-| (33) | Turn right ahead	| Turn right ahead|
-| (11) | Right-of-way at the next intersection	| Right-of-way at the next intersection|
-
-The model was able to correctly guess 5 of 5 traffic signs, which gives an accuracy of 100%.
+The model was able to correctly guess 3 of 5 traffic signs, which gives an accuracy of 60%.
+The model had a bad result finding traffic signs from the web, much worse than the train set (93,2%) and the test set (92,5%). The result surprised me because I expected that the results were upper or equal 80% (4 in 5 images).
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+
+For the softmax probabilities, it's possible to see that the some images cannot be recognize by the algorithm (images 1 and 4). The image 1 was classified in the first 5 options, but the image 4 was not minimaly corrrected classified.
 
 ![Softmax probabilities][softmax] 
 
